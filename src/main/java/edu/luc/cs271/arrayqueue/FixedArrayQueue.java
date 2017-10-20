@@ -1,5 +1,7 @@
 package edu.luc.cs271.arrayqueue;
 
+import com.sun.jmx.remote.internal.ArrayQueue;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -17,6 +19,7 @@ public class FixedArrayQueue<E> implements SimpleQueue<E> {
   private final E[] data;
 
   // TODO why do we need an explicit constructor?
+  ArrayQueue q = new ArrayQueue(5);
 
   @SuppressWarnings("unchecked")
   public FixedArrayQueue(final int capacity) {
