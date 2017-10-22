@@ -1,6 +1,6 @@
 package edu.luc.cs271.arrayqueue;
 
-import com.sun.jmx.remote.internal.ArrayQueue;
+//import com.sun.jmx.remote.internal.ArrayQueue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,8 +19,9 @@ public class FixedArrayQueue<E> implements SimpleQueue<E> {
   private final E[] data;
 
   // TODO why do we need an explicit constructor?
-  ArrayQueue q = new ArrayQueue(5);
-
+  public FixedArrayQueue() {
+    this(5);
+  }
   @SuppressWarnings("unchecked")
   public FixedArrayQueue(final int capacity) {
     this.capacity = capacity;
@@ -33,26 +34,45 @@ public class FixedArrayQueue<E> implements SimpleQueue<E> {
   @Override
   public boolean offer(final E obj) {
     // TODO
+    if (size <capacity) {
+      size++;
+      rear = (rear + 1)%capacity;
+      data[rear] = obj;
+      return true;
+    }
     return false;
   }
 
   @Override
   public E peek() {
     // TODO
+    if (size != 0)
+      return data[front];
+    else
     return null;
   }
 
   @Override
   public E poll() {
     // TODO
+    if (size != 0) {
+      E result = data[front];
+      front = (front + 1)%capacity;
+      size--;
+      return result;
+    }
     return null;
   }
 
   @Override
   public boolean isEmpty() {
     // TODO
+    if(size==0)
     return true;
+    else
+    return false;
   }
+
 
   @Override
   public int size() {
@@ -62,6 +82,13 @@ public class FixedArrayQueue<E> implements SimpleQueue<E> {
   @Override
   public List<E> asList() {
     // TODO implement using an ArrayList preallocated with the right size
-    return Arrays.asList();
+
+    List<E> list = new ArrayList<>();
+    if (!isEmpty()) {
+      for (int i=0; i<size; i++) {
+       list.add(i, data[(front+i)%capacity]);
+      }
+    }
+    return list;
   }
 }
