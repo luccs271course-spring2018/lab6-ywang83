@@ -17,7 +17,8 @@ public class SingleQueueService {
     final Object lock = new Object();
 
     // background activity for serving customers
-    final Thread consumer = new Thread(
+    final Thread consumer =
+        new Thread(
             () -> {
               while (true) {
                 String current;

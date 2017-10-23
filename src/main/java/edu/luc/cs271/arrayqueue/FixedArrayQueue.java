@@ -1,9 +1,8 @@
 package edu.luc.cs271.arrayqueue;
 
-//import com.sun.jmx.remote.internal.ArrayQueue;
+// import com.sun.jmx.remote.internal.ArrayQueue;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class FixedArrayQueue<E> implements SimpleQueue<E> {
@@ -22,6 +21,7 @@ public class FixedArrayQueue<E> implements SimpleQueue<E> {
   public FixedArrayQueue() {
     this(5);
   }
+
   @SuppressWarnings("unchecked")
   public FixedArrayQueue(final int capacity) {
     this.capacity = capacity;
@@ -34,9 +34,9 @@ public class FixedArrayQueue<E> implements SimpleQueue<E> {
   @Override
   public boolean offer(final E obj) {
     // TODO
-    if (size <capacity) {
+    if (size < capacity) {
       size++;
-      rear = (rear + 1)%capacity;
+      rear = (rear + 1) % capacity;
       data[rear] = obj;
       return true;
     }
@@ -46,10 +46,8 @@ public class FixedArrayQueue<E> implements SimpleQueue<E> {
   @Override
   public E peek() {
     // TODO
-    if (size != 0)
-      return data[front];
-    else
-    return null;
+    if (size != 0) return data[front];
+    else return null;
   }
 
   @Override
@@ -57,7 +55,7 @@ public class FixedArrayQueue<E> implements SimpleQueue<E> {
     // TODO
     if (size != 0) {
       E result = data[front];
-      front = (front + 1)%capacity;
+      front = (front + 1) % capacity;
       size--;
       return result;
     }
@@ -67,12 +65,9 @@ public class FixedArrayQueue<E> implements SimpleQueue<E> {
   @Override
   public boolean isEmpty() {
     // TODO
-    if(size==0)
-    return true;
-    else
-    return false;
+    if (size == 0) return true;
+    else return false;
   }
-
 
   @Override
   public int size() {
@@ -85,8 +80,8 @@ public class FixedArrayQueue<E> implements SimpleQueue<E> {
 
     List<E> list = new ArrayList<>();
     if (!isEmpty()) {
-      for (int i=0; i<size; i++) {
-       list.add(i, data[(front+i)%capacity]);
+      for (int i = 0; i < size; i++) {
+        list.add(i, data[(front + i) % capacity]);
       }
     }
     return list;
